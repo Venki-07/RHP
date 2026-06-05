@@ -1,0 +1,15 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main(){
+    char str[100];
+    scanf("%s",str);
+    int flag = 0;
+    int flag2 = 0;
+    for(int i =  0;str[i];i++){
+        flag = flag | (1<<(str[i]-'a'));
+    }
+    for(int j = 0;str[j];j++){
+        flag2 = flag2| (1<<(str[j]-'A'));
+    }
+    printf((flag == (1<<26)-1) & (flag2 == (1<<26)-1) ?"yes":"no");
+    return 0;
