@@ -1,0 +1,17 @@
+#include<iostream>
+#include<string>
+using namespace std;
+int main(){
+    string word;
+    cin>>word;
+    for(int mask = 1; mask < 1<<word.size();mask++){
+        string combo = "";
+        for(int i = 0;i<word.size();i++){
+            if(mask & 1<<i){
+            combo += word[i];
+        }
+        }
+        cout<<combo<<endl;
+    }
+    return 0;
+}
