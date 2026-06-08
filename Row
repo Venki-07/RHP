@@ -4,29 +4,29 @@ using namespace std;
 
 int main(){
     int a,b;
-    cout<<"Enter the r and c : ";
-    cin>>a>>b;
-    int arr[50][50]; // adjust size if needed
-    int rel[50][50];
-
-    // Input matrix
+    cout<<"Enter the row: ";
+    cin>>a;
+    cout<<"Enter the column: ";
+    cin>>b;
+    int arr[a][b]; 
+    int rel[a][b];
+    
     for(int i = 0;i<a;i++){
         for(int j = 0;j<b;j++){
             cin>>arr[i][j];
         }
     }
     
-    // Base case: first row
     for(int j = 0;j<b;j++){
         rel[0][j] = arr[0][j];
     }
     
-    // Fill DP table row by row
-    for(int i = 1;i<a;i++){
-        int fmax = INT_MIN;
-        int smax = INT_MIN;
 
-        // Find first and second largest in previous DP row
+    for(int i = 1;i<a;i++){
+        int fmax =  INT_MIN ;
+        int smax =  INT_MIN;
+
+        
         for(int j = 0;j<b;j++){
             if(rel[i-1][j] > fmax){
                 smax = fmax;
@@ -36,7 +36,6 @@ int main(){
             }
         }
 
-        // Update current row
         for(int j = 0;j<b;j++){
             if(rel[i-1][j] == fmax){
                 rel[i][j] = arr[i][j] + smax;
@@ -46,7 +45,6 @@ int main(){
         }
     }
 
-    // Find maximum in last row
     int result = INT_MIN;
     for(int j = 0;j<b;j++){
         result = max(result, rel[a-1][j]);
