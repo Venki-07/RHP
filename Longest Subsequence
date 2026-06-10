@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    string word1, word2;
+    cin >> word1 >> word2;
+
+    int row = word1.size();
+    int col = word2.size();
+
+    int matrix[101][101]; 
+    for (int i = 1; i <= row; i++) {
+        for (int j = 1; j <= col; j++) {
+            if (word1[i - 1] == word2[j - 1]) {
+                matrix[i][j] = matrix[i - 1][j - 1] + 1;
+            } else {
+                matrix[i][j] = max(matrix[i - 1][j], matrix[i][j - 1]);
+            }
+        }
+    }
+    for (int i = 0; i <= row; i++) {
+        for (int j = 0; j <= col; j++) {
+            cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    cout << "Longest Common Subsequence Length = " << matrix[row][col] << endl;
+    return 0;
+}
