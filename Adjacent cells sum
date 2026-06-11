@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+int main(){
+    int a,b;
+    cout<<"Enter size of matrix: ";
+    cin>>a>>b;
+    int arr[a][b];
+    for(int i = 0;i<a;i++){
+        for(int j = 0;j<b;j++){
+            cin>>arr[i][j];
+        }
+    }
+    int r,c,sum;
+    cout<<"Enter the row and column to find: ";
+    cin>>r>>c;
+    int diff[8][2] = {{-1,-1},{-1,0},{-1,1},{0,-1},{0,1},{1,-1},{1,0},{1,1}};
+    for(int k = 0;k<8;k++){
+        int row,col;
+    row = r + diff[k][0];
+    col = r+ diff[k][1];
+    if(row>=0 && col>=0 && row < a && col<b ){
+        sum +=  arr[row][col];
+    }
+    }
+    
+    cout<<"The sum of adjency matrix: "<<sum;
+}
