@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#define ll unsigned long long int
+using namespace std;
+
+void solve(){
+    int N, M; cin >> N >> M;
+    vector<int> cnt(M+1, 0);
+    for(int ctr = 1; ctr <= N; ctr++){
+        int curr; cin >> curr;
+        cnt[curr]++;
+    }
+    vector<int> psum(M+1, 0);
+    for(int cl = 1; cl <= M; cl++){
+        psum[cl] = psum[cl-1] + cnt[cl]; 
+    }
+    vector<int> ans(M+1, 0);
+    for(int cut = 1; cut <= min(M, 18); cut++){
+        ll mc = 0;
+        for(int x = 1; x <= M; x++){
+            ll cc = 0;
+            for(int mul = 1; mul*x <= M; mul++){
+                int lt = mul*x; int rt = lt+x-1;
+                cc += min(mul, ((1<<cut)-1))*(psum[min(rt, M)] - psum[lt-1]);
+            }
+            if((1LL<<cut)*x <= M){
+                cc += cnt[(1LL<<cut)*x];
+            }
+            mc = max(mc, cc);
+        }
+        ans[cut] = mc;
+    }
+    for(int cut = 1; cut <= M; cut++){
+        cout <<  ans[min(cut, 18)] << " ";
+    }
+}
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    solve();
+}
